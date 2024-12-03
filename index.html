@@ -8,7 +8,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
-<body>
+<body style="margin: 0; padding: 0">
     <div id="chart" style="
     position: fixed;
     top: 0;
@@ -4100,7 +4100,7 @@
 
         // Dimensions
         const width = 1920;
-        const height = 1080;
+        const height = 1000;
         const tooltip = d3.select("#tooltip");
 
         // Color scale
@@ -4168,11 +4168,10 @@
 
         // Add titles to nodes
         node.append("title").text(d => d.id);
-
-
-
+        
         // Tick function
         function ticked() {
+
             link
                 .attr("x1", d => d.source.x)
                 .attr("y1", d => d.source.y)
@@ -4180,8 +4179,8 @@
                 .attr("y2", d => d.target.y);
 
             node
-                .attr("cx", d => d.x = Math.max(d.AoA, Math.min(width - d.AoA, d.x)))
-                .attr("cy", d => d.y = Math.max(d.AoA, Math.min(height - d.AoA, d.y)));
+            .attr("cx", d => d.x = Math.max(10 + d.diff, Math.min(width - (10 + d.diff), d.x)))
+            .attr("cy", d => d.y = Math.max(10 + d.diff, Math.min(height - (10 + d.diff), d.y)));
         }
 
         // Drag event handlers
@@ -4199,8 +4198,8 @@
         });
 
         function dragged(event) {
-            event.subject.fx = event.x;
-            event.subject.fy = event.y;
+            event.subject.fx = Math.max(10 + event.subject.diff, Math.min(width - (10 + event.subject.diff), event.x));
+            event.subject.fy = Math.max(10 + event.subject.diff, Math.min(height - (10 + event.subject.diff), event.y));
         }
 
         function dragended(event) {
