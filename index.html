@@ -4099,8 +4099,11 @@
         // Load the JSON data
 
         // Dimensions
-        const width = 1920;
-        const height = 1000;
+
+
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+
         const tooltip = d3.select("#tooltip");
 
         // Color scale
